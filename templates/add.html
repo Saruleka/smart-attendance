@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/add_names.css">
+    <title>Add Student</title>
+</head> 
+<body>
+    <div class="header-section">
+        <h2 >Smart Attendance System</h2>
+        <p >Keep in track of the attendance and get instant reports </p>
+    </div>
+    
+    <nav>
+        <ul>
+            <li style = "font-size : 24"><b>WELCOME<b></li>
+            <br></br>
+            <li ><a href={{url_for("mark_attendance")}}>Home</a></li>
+            <li class="active"><a href="{{url_for("add_student")}}">Add Student</a></li>
+            <li><a href={{url_for("view_attendance")}}>View Attendance</a></li>
+            <li><a href={{url_for("report")}}>Reports</a></li> 
+            <li><a href={{url_for("login")}}>Exit</a></li>
+            <div class="bottom-img">
+                <img src="/static/images/teacher.png" alt="student">
+            </div>
+        </ul>
+        
+    </nav>
+    
+    
+
+    <form class="option" action="/add_student" method="POST">
+        <h3>Add Student to a Class</h3>
+        <label>Select Class</label>
+        <select name="class" required>
+            <option value="">Select Class</option>
+            {% for i in range(1, 13) %}
+                <option value="{{ i }}">Class {{ i }}</option>
+            {% endfor %}
+        </select>
+
+        <br><br>
+
+        <label>Enter Student Names (one per line)</label><br>
+        <textarea name="names" rows="9" cols="50" required></textarea>
+
+        <br><br>
+        <input type="submit" value="Add Students">
+
+        <ul>
+            {% for msg in get_flashed_messages(with_categories=True)%}
+            <li style="color:{% if  msg[0] == 'error'%}red {%else%} green {% endif %}">
+                {{msg[1]}}
+            </li>
+            {% endfor %}
+
+        </ul> 
+    </form>
+
+    
+</body>
+</html>  

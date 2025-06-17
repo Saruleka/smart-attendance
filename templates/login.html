@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance System - Login</title>
+    <link rel="stylesheet" href="/static/login.css"> 
+</head>
+<body>
+
+    <div class="bg">
+            <img src="/static/images/class.jpg" alt="classroom">
+    </div>
+
+    <h3>Attendance System</h3>
+    <div class = "login">
+        <form action="\home" method="POST">
+            <div class="name">
+               <label>Username</label>
+               <input name = "username" type="text">
+            </div>
+            <div class ="pass">
+                <label>Password</label>
+                <input name = "Password" type="password">
+            </div>
+                
+            <div class = "button">
+                <input type = "submit" value="Login">
+            </div>
+
+        </form>
+
+        <ul>
+            {% for msg in get_flashed_messages(with_categories=True)%}
+            <li style = "color : {%if msg[0] == "error" %} red {%else%} green {% endif %}">
+                {{msg[1]}}
+            </li>
+            {% endfor %}
+        </ul>
+       
+    </div>
+</body>
+</html>

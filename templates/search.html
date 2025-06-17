@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports</title>
+    <link rel="stylesheet" href="/static/reports.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <div class="header-section">
+        <h2>Smart Attendance System</h2>
+        <p>Keep in track of the attendance and get instant reports</p>
+    </div>
+
+    <nav>
+        <ul>
+            <li><b>WELCOME</b></li>
+            <br></br>
+            <li><a href="{{ url_for('mark_attendance') }}">Home</a></li>
+            <li><a href="{{ url_for('add_student') }}">Add Student</a></li>
+            <li><a href="{{ url_for('view_attendance') }}">View Attendance</a></li>
+            <li class="active"><a href="{{ url_for('report') }}">Reports</a></li>
+            <li><a href="{{ url_for('login') }}">Exit</a></li>
+            <div class="bottom-img">
+                <img src="/static/images/teacher.png" alt="student">
+            </div>
+        </ul>
+    </nav>
+
+
+    <div class="option">
+        <h2>Daily Attendance by Class</h2>
+        <canvas id="dailyChart"></canvas>
+
+    </div>
+
+    <script>
+        const dailyData = {{ daily_data | safe }};
+        new Chart(document.getElementById('dailyChart'), {
+            type: 'bar',
+            data: {
+                labels: dailyData.labels,
+                datasets: [{
+                    label: 'Present Today',
+                    data: dailyData.data,
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        
+    </script>
+
+</body>
+</html>
