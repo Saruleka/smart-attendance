@@ -183,6 +183,8 @@ def report():
 
     return render_template("search.html", daily_data=daily_data, weekly_data=weekly_data)
 
-
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 10000))  
+    app.run(host='0.0.0.0', port=port)
 
 
