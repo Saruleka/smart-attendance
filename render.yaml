@@ -3,5 +3,5 @@ services:
     name: smart-attendance
     env: python
     buildCommand: ""
-    startCommand: python app.py
+    startCommand: gunicorn app:app
     plan: free
